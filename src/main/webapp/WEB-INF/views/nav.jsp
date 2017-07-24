@@ -116,9 +116,6 @@
 	margin-bottom: 0em;
 }
 
-
-
-  
 .fh5co-nav-toggle>span {
 	color: #333;
 }
@@ -210,7 +207,7 @@ color: #333;
 	<br><br>
 	<hr>
 	<h2 class="fh5co-lead"><a href="/logCheck/GETlogin">로그인</a></h2>
-	<h2 class="fh5co-lead"><a href="/GuiltyPleasure/logcheck?cmd=idpwpage">아이디/비밀번호 찾기</a></h2>
+	<h2 class="fh5co-lead"><a href="/logCheck/GETidpwpage">아이디/비밀번호 찾기</a></h2>
 	<hr>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -226,7 +223,7 @@ color: #333;
 	<hr>
 	<a href="/GuiltyPleasure/myinfo?cmd=MYINFO">MY PAGE</a>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="/GuiltyPleasure/logcheck?cmd=logoutpage">LOGOUT</a>
+	<a href="/logCheck/GETlogoutpage">LOGOUT</a>
 	</c:if>
 	</div>
 	</div>
@@ -254,8 +251,12 @@ color: #333;
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#fh5co-navbar" aria-expanded="false" aria-controls="navbar"><span>Menu</span> <i></i></a>
-					<a href="${pageContext.servletContext.contextPath}/" class="navbar-brand"><span>Guilty Pleasure</span></a>
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" 
+						data-toggle="collapse" data-target="#fh5co-navbar"
+						aria-expanded="false" aria-controls="navbar">
+						<span>Menu</span>
+					</a>
+					<a href="/" class="navbar-brand"><span>Guilty Pleasure</span></a>
 				</div>
 			</div>
 		</div>

@@ -19,6 +19,9 @@ import com.guiltypleausre.web.service.logcheck.LogCheckService;
  *  GET		/logCheck/GETlogin				로그인 페이지로 이동
  *  GET		/logCheck/GETlogoutpage			로그아웃 페이지로 이동
  *  GET		/logCheck/GETresistrationpage	회원가입 페이지로 이동
+ *  GET		/logCheck/GETidpwpage			id,pw 찾기 페이지로 이동
+ *  GET		/logCheck/GETlogoutpage			로그아웃 페이지로 이동
+ *  GET		/logCheck/GETlogout				로그아웃 후 메인 페이지로 이동
  *  GET		/logCheck/GETidcheck			AJAX 아이디 유효성 검사
  *  POST	/logCheck/POSTaddUser			회원가입 등록
  *  POST	/logCheck/GETloginSuccess		로그인 성공
@@ -39,29 +42,45 @@ public class LogCheckController {
 	// 로그인 페이지 이동
 	@RequestMapping(value = "/GETlogin")
 	public String getLogin() {
-		System.out.println("/GETlogin get 방법 접속 테스트");
 		return "/login/login";
 	}
 	
 	// security에서 로그인 요청을 하기 위해 만들어준 메서드
 	@RequestMapping(value = "/check")
-	public void check() {
+	public void check() {}
+	
+	// 로그아웃 페이지로 이동
+	@RequestMapping(value = "/GETlogoutpage")
+	public String getLogout() {
+		return "/login/logout";
 	}
+	
+	// 로그아웃 후 메인페이지로 이동
+	@RequestMapping(value = "/GETlogout")
+	public String getLogout(HttpSession session) {
+		session.invalidate();
+		return "main";
+	}
+	
+	// id,pw 찾기 페이지로 이동
+	@RequestMapping(value = "/GETidpwpage")
+	public String getIdPwPage() {
+		return "login/idpw";
+	}
+	
 	
 	@RequestMapping(value = "/GETloginSuccess")
 	public String getLoginSuccess(Authentication id, HttpSession session){
-		System.out.println("id.getPrincipal().getName = : " + id.getName().toString());
+		//System.out.println("id.getPrincipal().getName = : " + id.getName().toString());
 		session.setAttribute("u_id", id.getName().toString());
 		return "main";
 	}
 	
 	// 로그인 에러 페이지 이동
-		@RequestMapping(value = "/GETloginError")
-		public String getLoginError() {
-			return "/login/login_err";
-		}
-	
-	
+	@RequestMapping(value = "/GETloginError")
+	public String getLoginError() {
+		return "/login/login_err";
+	}
 	
 	// 로그아웃 페이지이동
 	@RequestMapping(value = "/GETlogoutpage", method = RequestMethod.GET)
