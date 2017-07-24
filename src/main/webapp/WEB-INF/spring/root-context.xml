@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	
+	<!-- 스프링이 가지고 있는 JDBC 모듈 DB 연결 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"></property>
+		<property name="username" value="GP"></property>
+		<property name="password" value="1111"></property>
+	</bean>
+	
+	<!-- 위에 만든 데이터소스를 JDBC템플릿에 넘겨준다. -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	
+	<!-- 스프링이 연결해 놓은 DB를 mybatis가 가져간다. 여기다가 mybatis-config가 어딨는지도 설정한다. -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+		<!-- mybatis 맵퍼 위치를 알려준다. /**/맵퍼즈 안에 어떤것이 오든지 다 읽어 드리겠다라는 뜻-->
+		<property name="mapperLocations" value="classpath:mappers/**/*mapper.xml" ></property>
+	</bean>
+	
+	<bean id="sqlSessioin" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+	
+	
+</beans>

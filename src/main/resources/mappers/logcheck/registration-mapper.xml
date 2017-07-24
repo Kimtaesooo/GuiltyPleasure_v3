@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.guiltypleasure.mappers.logcheck.registration-mapper">
+	<insert id = "addUser">
+		insert into userinfo(u_id, u_pw, u_name, u_nickname, u_phone, u_email, u_addr, u_postnumber,
+		u_birth, u_gender, u_introduce, u_regdate, u_point, u_delete, u_question, u_answer, u_comment)
+		values(#{u_id}, #{u_pw}, #{u_name}, #{u_nickname}, #{u_phone}, #{u_email}, #{u_addr}, #{u_postnumber},
+		#{u_birth}, #{u_gender}, #{u_introduce}, sysdate, 0 ,'N', #{u_question}, #{u_answer}, #{u_comment})
+	</insert>
+	
+	<insert id = "u_poaA">
+		insert into u_poa(u_id, Q_type, up_a_cnt, up_wa_cnt)
+		values(#{u_id}, 'A', 0, 0)
+	</insert>
+	
+	<insert id = "u_poaB">
+		insert into u_poa(u_id, Q_type, up_a_cnt, up_wa_cnt)
+		values(#{u_id},'B', 0, 0)
+	</insert>
+	
+	<insert id = "u_poaC">
+		insert into u_poa(u_id, Q_type, up_a_cnt, up_wa_cnt)
+		values(#{u_id}, 'C', 0, 0)
+	</insert>
+	
+	<insert id = "u_poaD">
+		insert into u_poa(u_id, Q_type, up_a_cnt, up_wa_cnt)
+		values(#{u_id}, 'D', 0, 0)
+	</insert>
+	
+	<insert id = "u_battle">
+		insert into u_battle(u_id, ub_win, ub_lose)
+		values(#{u_id}, 0, 0)
+	</insert>
+	
+	<insert id = "u_manage">
+		insert into u_manage(u_id, um_chat, um_single, um_battle, um_entry, um_enroll)
+		values(#{u_id}, '', '', '', '', '')
+	</insert>
+	
+	<insert id="insertAuth">
+		insert into authorities(u_id, authority)
+		values(#{u_id}, #{authority})
+	</insert>
+</mapper>

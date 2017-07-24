@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
+<configuration>
+	<!-- 긴 이름을  짧은 이름으로 사용할 수 있게 변경
+	<typeAliases>
+		<typeAlias type="com.taesoo.web.domain.member.Member" alias="Member"/>
+		<typeAlias type="com.taesoo.web.domain.member.RegisterRequest" alias="RegisterRequest"/>
+		<typeAlias type="com.taesoo.web.domain.board.Board" alias="Board"/>
+		<typeAlias type="com.taesoo.web.domain.board.Criteria" alias="Criteria"/>
+	</typeAliases>
+	-->
+</configuration>

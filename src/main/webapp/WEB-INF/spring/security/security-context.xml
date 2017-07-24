@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<http pattern="/**/*.js" security="none"/>
+	<http pattern="/**/*.css" security="none"/>
+	<http pattern="/**/*.png" security="none"/>
+	<http pattern="/**/*.jpg" security="none"/>
+	<http pattern="/**/design/**" security="none"/>
+	
+	<http auto-config="true">
+		<intercept-url pattern="/logCheck/GETloginError" access="permitAll"/>
+		<intercept-url pattern="/logCheck/GETlogin" access="permitAll"/>
+		<intercept-url pattern="/logCheck/GETresistrationpage" access="permitAll"/>
+		<intercept-url pattern="/" access="permitAll"/>
+		<intercept-url pattern="/**" access="isAuthenticated()"/>
+		
+		<form-login login-page="/logCheck/GETlogin"
+					login-processing-url="/logCheck/check"
+					username-parameter="form-username"
+					password-parameter="form-password  "
+					default-target-url="/logCheck/GETloginSuccess"
+					always-use-default-target="true"
+					authentication-failure-url="/logCheck/GETloginError"/>
+					
+		<session-management>
+			<concurrency-control max-sessions="1" 
+								expired-url="/"
+								error-if-maximum-exceeded="true"/>
+		</session-management>
+		
+		<!-- csrf 잠깐 테스트용으로 끈다. 이걸 안꺼주면 모든 페이지에 hidden타입으로 csrf를 다 정의해야 한다. -->
+		<csrf disabled="true"/>
+	</http>
+	
+	<!-- Provider의 역할을 할 수 있는 클래스를 상속 받아야 한다. -->
+	<beans:bean id="customAuthenticationProvider" class="com.guiltypleausre.web.CustomAuthenticationProvider"></beans:bean>
+	
+	
+	<!-- 인증 매니저를 설정한다. 이 부분에서 설정한 구성을 사용해 Spring Security는 인증 객체를 가져오고 인증 과정을 처리한다. -->
+	<authentication-manager>
+		<authentication-provider>
+			<!-- 사용자 정보를 얻어오는 user service를 DB에 저장된 사용자 정보를 이용하여 인증할 수 있다. -->
+			<jdbc-user-service data-source-ref="dataSource"
+							users-by-username-query="select u_id, u_pw, 1 as result from userinfo where u_id=?"
+							authorities-by-username-query="select u_id, authority from authorities where u_id=?"/>
+			<password-encoder hash="bcrypt"/>
+		</authentication-provider>
+	</authentication-manager>
+	
+	<beans:bean id="bcrypt" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean>
+
+</beans:beans>
