@@ -94,7 +94,7 @@
 	<script>
 		var textarea = document.getElementById("messageWindow");
 		var connectionCheck = document.getElementById("connectionCheck");
-		var webSocket = new WebSocket("ws://localhost:8080/GuiltyPleasure/battlesocket");
+		var webSocket = new WebSocket("ws://localhost:8080/GuiltyPleasure/websocket/battleQuiz");
 		var inputMessage = document.getElementById('inputMessage');
 		var user01 = document.getElementById('user01').value;
 		var br_num = document.getElementById('br_num').value;
