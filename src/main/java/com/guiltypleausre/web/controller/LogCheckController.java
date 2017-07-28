@@ -51,7 +51,7 @@ public class LogCheckController {
 	
 	// 로그아웃 페이지로 이동
 	@RequestMapping(value = "/GETlogoutpage")
-	public String getLogout() {
+	public String getLogoutPage() {
 		return "/login/logout";
 	}
 	
@@ -70,9 +70,15 @@ public class LogCheckController {
 	
 	
 	@RequestMapping(value = "/GETloginSuccess")
-	public String getLoginSuccess(Authentication id, HttpSession session){
+	public String getLoginSuccess(Authentication id, HttpSession session) throws Exception{
 		//System.out.println("id.getPrincipal().getName = : " + id.getName().toString());
+		UserInfoDto dto =  logcheckservice.selectById(id.getName().toString());
 		session.setAttribute("u_id", id.getName().toString());
+		session.setAttribute("u_nickname", dto.getU_nickname());
+		session.setAttribute("u_point", dto.getU_point());
+		
+		dto = logcheckservice.searchUserInfo(id.getName().toString());
+		session.setAttribute("udto", dto);
 		return "main";
 	}
 	

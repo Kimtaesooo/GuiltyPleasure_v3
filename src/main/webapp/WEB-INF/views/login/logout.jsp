@@ -57,7 +57,7 @@
 							<div class="form-top-left">
 								<h3>로그아웃</h3>
 								<p>정말로 로그아웃 하시겠습니까??</p>
-								<a href="/logCheck/logout">네!</a><br>
+								<a href="/logCheck/GETlogout">네!</a><br>
 								<a href="/">아니오</a>
 							</div>
 						</div>
@@ -78,14 +78,10 @@
 
 
 	<!-- Javascript -->
-	<script
-		src="${pageContext.request.contextPath}/design/assets/js/jquery-1.11.1.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/design/assets/bootstrap/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/design/assets/js/jquery.backstretch.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/design/assets/js/scripts.js"></script>
+	<script src="/resources/design/assets/js/jquery-1.11.1.min.js"></script>
+	<script src="/resources/design/assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/resources/design/assets/js/jquery.backstretch.min.js"></script>
+	<script src="/resources/design/assets/js/scripts.js"></script>
 
 	<!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>

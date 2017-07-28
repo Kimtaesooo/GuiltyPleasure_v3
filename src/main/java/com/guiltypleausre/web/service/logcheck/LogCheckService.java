@@ -8,4 +8,5 @@ public interface LogCheckService {
 	public void addUser(UserInfoDto regReq) throws Exception;
 	public UserInfoDto selectById(String u_id) throws Exception;
 	public List<UserInfoDto> selectAll() throws Exception;
+	public UserInfoDto searchUserInfo(String u_id) throws Exception;
 }

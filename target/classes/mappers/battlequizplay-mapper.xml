@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.guiltypleasure.mappers.battlequizplay-mapper">
+
+
+	<insert id = "makeRoom" parameterType="Battle_Room">
+		insert into battle_room(br_num, br_subject, br_pw, q_type, br_cnt, br_point, u_id, br_people, br_gamestate)
+		values('BR'||LPAD((seq_br_num.nextVal),4,'0'),#{br_subject},#{br_pw},#{q_type},#{br_cnt},
+		#{br_point}, #{u_id}, 1, 'N')
+		
+		<selectKey keyProperty="br_num" resultType="String" order="AFTER">
+			select 'BR'||LPAD((seq_br_num.currVal),4,'0') from dual
+		</selectKey>
+	</insert>
+	
+	<insert id = "playRoom" parameterType="Battle_Room">
+		insert into battle_play(br_num, q_type, user01, user02, bp_01cnt, bp_02cnt, bp_count, bp_state)
+			values(#{br_num},#{q_type},#{u_id},'',0,0,#{br_cnt},0)
+	</insert>
+	
+	<select id="getListRoom" resultType="Battle_Room" parameterType="Battle_Room">
+		select br_num, br_subject, br_pw, decode (q_type, 'A', '연예', 'B','넌센스','C','상식','D','아재') as q_type,
+			br_cnt, br_point, u_id, br_people, br_gamestate
+		from battle_room order by br_gamestate, br_num
+	</select>
+	
+	
+	
+</mapper>

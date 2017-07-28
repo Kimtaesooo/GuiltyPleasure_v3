@@ -11,11 +11,16 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private static final String namespace = "com.guiltypleasure.mappers.logcheck.userinfo-mapper";
+	private static final String namespace = "com.guiltypleasure.mappers.userinfo-mapper";
 
 	@Override
 	public UserInfoDto selectById(String u_id) throws Exception {
 		return sqlSession.selectOne(namespace + ".selectById", u_id);
+	}
+
+	@Override
+	public UserInfoDto searchUserInfo(String u_id) throws Exception {
+		return sqlSession.selectOne(namespace + ".searchUserInfo", u_id);
 	}
 
 }

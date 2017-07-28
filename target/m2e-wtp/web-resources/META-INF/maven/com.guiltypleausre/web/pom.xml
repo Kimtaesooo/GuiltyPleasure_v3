@@ -177,6 +177,17 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.42</version>
 		</dependency>
+		
+		<!-- 
+			org.springframework.web.socket.handler.TextWebSocketHandler 클래스를 상속받아 websocket handler를 생성
+		 -->
+		<dependency>
+           <groupId>org.springframework</groupId>
+           <artifactId>spring-websocket</artifactId>
+           <version>${org.springframework-version}</version>
+		</dependency>
+
+		
 
 
 	</dependencies>

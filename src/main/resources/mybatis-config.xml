@@ -3,12 +3,10 @@
 
 
 <configuration>
-	<!-- 긴 이름을  짧은 이름으로 사용할 수 있게 변경
+	<!-- 긴 이름을  짧은 이름으로 사용할 수 있게 변경 -->
 	<typeAliases>
-		<typeAlias type="com.taesoo.web.domain.member.Member" alias="Member"/>
-		<typeAlias type="com.taesoo.web.domain.member.RegisterRequest" alias="RegisterRequest"/>
-		<typeAlias type="com.taesoo.web.domain.board.Board" alias="Board"/>
-		<typeAlias type="com.taesoo.web.domain.board.Criteria" alias="Criteria"/>
+		<typeAlias type="com.guiltypleausre.web.domain.UserInfoDto" alias="UserInfoDto"/>
+		<typeAlias type="com.guiltypleausre.web.domain.Battle_Play" alias="Battle_Play"/>
+		<typeAlias type="com.guiltypleausre.web.domain.Battle_Room" alias="Battle_Room"/>
 	</typeAliases>
-	-->
 </configuration>

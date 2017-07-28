@@ -4,4 +4,5 @@ import com.guiltypleausre.web.domain.UserInfoDto;
 
 public interface UserInfoDao {
 	public UserInfoDto selectById(String u_id) throws Exception;
+	public UserInfoDto searchUserInfo(String u_id) throws Exception;
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.guiltypleasure.mappers.userinfo-mapper">
+	<!-- 유저 정보 조회 -->
+	<select id="selectById" resultType="UserInfoDto" parameterType="UserInfoDto">
+		select * from userinfo where u_id = #{u_id}
+	</select>
+	
+	<!-- 유저 관리 조회 -->
+	<select id="searchUserInfo" resultType="UserInfoDto" parameterType="UserInfoDto">
+		SELECT USR.U_ID, USR.U_COMMENT, USR.U_DELETE, TO_CHAR(CASE WHEN UM.UM_CHAT > CURRENT_TIMESTAMP THEN UM_CHAT ELSE NULL END,'YYYY-MM-DD')
+		AS UM_CHAT, TO_CHAR(CASE WHEN UM.UM_SINGLE > CURRENT_TIMESTAMP THEN UM_SINGLE ELSE NULL END,'YYYY-MM-DD')
+		AS UM_SINGLE, TO_CHAR(CASE WHEN UM.UM_BATTLE > CURRENT_TIMESTAMP THEN UM_BATTLE ELSE NULL END,'YYYY-MM-DD')
+		AS UM_BATTLE, TO_CHAR(CASE WHEN UM.UM_ENROLL > CURRENT_TIMESTAMP THEN UM_ENROLL ELSE NULL END,'YYYY-MM-DD')
+		AS UM_ENROLL, TO_CHAR(CASE WHEN UM.UM_ENTRY > CURRENT_TIMESTAMP THEN UM_ENTRY ELSE NULL END,'YYYY-MM-DD')
+		AS UM_ENTRY, USR.U_POINT FROM USERINFO USR INNER JOIN U_MANAGE UM ON USR.U_ID = UM.U_ID WHERE USR.U_ID = #{u_id}
+	</select>
+</mapper>

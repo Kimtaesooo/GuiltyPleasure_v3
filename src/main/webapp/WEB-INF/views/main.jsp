@@ -14,8 +14,8 @@
 <body>
 <%@ include file="nav.jsp" %>
 <input type="hidden" id="u_id" value="${u_id}" />
-<input type="hidden" id="single" value="${udto.no_single}" />
-<input type="hidden" id="battle" value="${udto.no_battle}" />
+<input type="hidden" id="single" value="${udto.um_single}" />
+<input type="hidden" id="battle" value="${udto.um_battle}" />
 	<style>
 #fh5co-hero {
 	padding-top: 2em;

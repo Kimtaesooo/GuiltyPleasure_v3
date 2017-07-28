@@ -67,7 +67,7 @@
 			alert('배틀 플레이가 금지된 유저입니다.');
 			return;
 		}
-		location.href = "/GuiltyPleasure/battle?cmd=BATTLEPAGE";
+		location.href = "/battleQuiz/GETbattlepage";
 	}
 
 	function inshop() {
@@ -198,8 +198,8 @@ color: #333;
 </head>
 <body>
 <input type="hidden" id="u_id" value="${u_id}" />
-<input type="hidden" id="single" value="${udto.no_single}" />
-<input type="hidden" name="battle" value="${udto.no_battle}" />
+<input type="hidden" id="single" value="${udto.um_single}" />
+<input type="hidden" name="battle" value="${udto.um_battle}" />
 <div id="fh5co-offcanvass" style="padding-top: 0px;">
 <div class="row" align="center">
 				<div class="col-md-12">

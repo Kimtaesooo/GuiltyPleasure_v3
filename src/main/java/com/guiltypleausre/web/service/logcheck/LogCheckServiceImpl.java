@@ -24,11 +24,17 @@ public class LogCheckServiceImpl implements LogCheckService {
 		registDao.addUser(regReq);
 	}
 	
+	// 유저 정보 조회
 	@Override
 	public UserInfoDto selectById(String u_id) throws Exception {
 		return userInfoDao.selectById(u_id);
 	}
 
+	// 유저 관리 조회
+	@Override
+	public UserInfoDto searchUserInfo(String u_id) throws Exception {
+		return userInfoDao.searchUserInfo(u_id);
+	}
 
 	@Override
 	public List<UserInfoDto> selectAll() throws Exception {

@@ -9,7 +9,8 @@
 	<http pattern="/**/*.css" security="none"/>
 	<http pattern="/**/*.png" security="none"/>
 	<http pattern="/**/*.jpg" security="none"/>
-	<http pattern="/**/design/**" security="none"/>
+	<http pattern="/**/*.map" security="none"/>
+	<http pattern="/resources/design/**" security="none"/>
 	
 	<http auto-config="true">
 		<intercept-url pattern="/logCheck/GETloginError" access="permitAll"/>
