@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.guiltypleausre.web.domain.Quiz;
+import com.guiltypleausre.web.service.battlequiz.BattleQuizService;
 
 /**
  * 퀴즈를 랜덤으로 받아오는 클래스
@@ -14,19 +15,21 @@ import com.guiltypleausre.web.domain.Quiz;
  */
 @Repository
 public class GetBattleQuiz {
+	@Autowired
+	private BattleQuizService battleQuizservice;
+	
 	/**
 	 * 퀴즈를 랜덤으로 받아온다.
 	 * @param br_type
 	 * 			퀴즈 유형을 받아온다.
 	 * @return String quiz 퀴즈 코드와 유형, 문제, 정답과 오답을 문자열로 반환한다.
+	 * @throws Exception 
 	 */
-	public String getQuiz(String br_type) {
-		BattlePlay dao = new BattlePlay();
+	public String getQuiz(String q_type) throws Exception {
 		Quiz quizdto = new Quiz();
 		String quiz = "";
 		String[] quizinfo = new String[4];
-		List list = dao.getQuiz(br_type);
-		quizdto = (Quiz) list.get(0);
+		quizdto = battleQuizservice.getQuiz(q_type);
 
 		quizinfo[0] = quizdto.getQ_answer();
 		quizinfo[1] = quizdto.getQ_wa_a();

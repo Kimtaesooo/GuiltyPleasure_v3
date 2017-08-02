@@ -22,9 +22,12 @@
 			$("#theModal").modal();
 		});
 	});
+</script>
+-->
 
+<script>
 	function fnRead(u_id, br_num, q_type) {
-		document.frmRead.bangjang.value = u_id;
+		document.frmRead.u_id.value = u_id;
 		document.frmRead.br_num.value = br_num;
 		if (q_type == "연예") {q_type = "A"	};
 		if (q_type == "넌센스") {q_type = "B"};
@@ -34,7 +37,6 @@
 		document.frmRead.submit();
 	}
 </script>
- -->
 <title>배틀 대기방</title>
 </head>
 
@@ -167,9 +169,10 @@
 	</div>
 	<!-- 방만들기 모달 종료-->
 	<form name="frmRead" method="post"
-		action="/GuiltyPleasure/battle?cmd=ENTERROOM">
-		<input type="hidden" name="bangjang" /> <input type="hidden"
-			name="br_num" /> <input type="hidden" name="q_type" />
+		action="/battleQuiz/POSTenterRoom">
+		<input type="hidden" name="u_id" />
+		<input type="hidden" name="br_num" />
+		<input type="hidden" name="q_type" />
 	</form>
 	<script>
 		$(".onlyNumber").keyup(function(event) {

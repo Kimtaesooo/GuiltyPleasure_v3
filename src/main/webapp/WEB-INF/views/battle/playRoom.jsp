@@ -92,9 +92,9 @@
 
 	<!-- 채팅 부분 -->
 	<script>
+		var webSocket = new WebSocket("ws://localhost:8080/websocket/battleQuiz");
 		var textarea = document.getElementById("messageWindow");
 		var connectionCheck = document.getElementById("connectionCheck");
-		var webSocket = new WebSocket("ws://localhost:8080/GuiltyPleasure/websocket/battleQuiz");
 		var inputMessage = document.getElementById('inputMessage');
 		var user01 = document.getElementById('user01').value;
 		var br_num = document.getElementById('br_num').value;
@@ -135,6 +135,7 @@
 		function onMessage(event) {
 			var message = new String(event.data);
 			var strArray = message.split(':');
+			alert(message);
 
 			// 채팅
 			if (strArray[0] == "messageSend" && strArray[1] == br_num) {
@@ -210,7 +211,7 @@
 				webSocket.send("messageSend:" + br_num + ":" + me + ":"
 						+ inputMessage.value);
 				inputMessage.value = "";
-				 textarea.scrollTop = textarea.scrollHeight;
+				textarea.scrollTop = textarea.scrollHeight;
 			}
 		}
 

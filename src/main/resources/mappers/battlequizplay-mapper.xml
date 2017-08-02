@@ -25,6 +25,65 @@
 		from battle_room order by br_gamestate, br_num
 	</select>
 	
+	<select id="idRoomInfo" resultType="Battle_Room" parameterType="Battle_Room">
+		select * from battle_room where u_id = #{u_id}
+	</select>
+	
+	<select id="numRoomInfo" resultType="Battle_Room" parameterType="Battle_Room">
+		select * from battle_room where br_num = #{br_num}
+	</select>
+	
+	<select id="selectBattleRoomState" resultType="String" parameterType="String">
+		select br_gamestate from battle_room where br_num = #{br_num}
+	</select>
+	
+	<update id="updateBattleRoomState">
+		update battle_room set br_gamestate = 'Y' where br_num = #{br_num}
+	</update>
+	
+	<select id="numPlayInfo" resultType="Battle_Play" parameterType="String">
+		select * from battle_play where br_num = #{br_num}
+	</select>
+		
+	<select id="checkanswer" resultType="String" parameterType="String">
+		select q_answer from quiz where q_code = #{q_code}
+	</select>
+	
+	<update id="updatePlayRoomState">
+		update battle_play set bp_state = bp_state+1 where br_num = #{br_num}
+	</update>
+	
+	<select id="selectPlayCnt">
+		select * from battle_play where br_num = #{br_num}
+	</select>
+	
+	<update id="updatePlayCnt1">
+		update battle_play set bp_01cnt = bp_01cnt+1 where br_num = #{br_num}
+	</update>
+	
+	<update id="updatePlayCnt2">
+		update battle_play set bp_02cnt = bp_02cnt+1 where br_num = #{br_num}
+	</update>
+	
+	<update id="updatePlayCnt3">
+		update battle_play set bp_state = 0 where br_num = #{br_num}
+	</update>
+	
+	<select id="getQuiz" resultType="Quiz" parameterType="String">
+		<![CDATA[
+			select * from(select * from quiz where q_type = #{q_type}
+			order by dbms_random.value) where rownum <= 1
+		]]>	
+	</select>
+	
+	<update id="updatePlayRoom">
+		update battle_play set user02 = #{u_id} where br_num = #{br_num}
+	</update>
+	
+	<update id="updateBattleRoom">
+		update battle_room set br_people = br_people + 1 where br_num = #{br_num}
+	</update>
+	
 	
 	
 </mapper>

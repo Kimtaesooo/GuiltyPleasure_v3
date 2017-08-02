@@ -8,5 +8,6 @@
 		<typeAlias type="com.guiltypleausre.web.domain.UserInfoDto" alias="UserInfoDto"/>
 		<typeAlias type="com.guiltypleausre.web.domain.Battle_Play" alias="Battle_Play"/>
 		<typeAlias type="com.guiltypleausre.web.domain.Battle_Room" alias="Battle_Room"/>
+		<typeAlias type="com.guiltypleausre.web.domain.Quiz" alias="Quiz"/>
 	</typeAliases>
 </configuration>

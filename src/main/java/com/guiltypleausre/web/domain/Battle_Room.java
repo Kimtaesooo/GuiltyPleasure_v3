@@ -11,6 +11,7 @@ public class Battle_Room {
 	private String u_id;
 	private int br_people;
 	private String br_gamestate;
+	private String bangjang;
 	
 	public String getBr_num() {
 		return br_num;
@@ -69,4 +70,11 @@ public class Battle_Room {
 	public void setBr_gamestate(String br_gamestate) {
 		this.br_gamestate = br_gamestate;
 	}
+	public String getBangjang() {
+		return bangjang;
+	}
+	public void setBangjang(String bangjang) {
+		this.bangjang = bangjang;
+	}
+	
 }
