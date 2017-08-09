@@ -3,12 +3,12 @@ package com.guiltypleausre.web.websocket;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketMessage;
@@ -20,16 +20,25 @@ import com.guiltypleausre.web.domain.Battle_Room;
 import com.guiltypleausre.web.repository.battlequizmodule.BattleQuizPlay;
 import com.guiltypleausre.web.repository.battlequizmodule.BattleQuizPlayImpl;
 import com.guiltypleausre.web.repository.battlequizmodule.GetBattleQuiz;
+import com.guiltypleausre.web.service.battlequiz.BattleQuizService;
 
-public class SocketHandler extends TextWebSocketHandler implements InitializingBean {
+public class SocketHandler extends TextWebSocketHandler implements InitializingBean{
 
 	private final Logger logger = LogManager.getLogger(getClass());
-	static HashMap<String, WebSocketSession> map = new HashMap<String, WebSocketSession>(); // 세션과
-																							// 아이디
-																							// 맵핑할려고
-																							// 했지만
-																							// 안씀
+	// 세션과 아이디 맵핑할려고 했지만 안씀
+	static HashMap<String, WebSocketSession> map = new HashMap<String, WebSocketSession>(); 
+	
 	private static Set<WebSocketSession> clients = Collections.synchronizedSet(new HashSet<WebSocketSession>());
+	
+	@Autowired
+	private BattleQuizPlay battlequizplay;
+	
+	@Autowired
+	private BattleQuizService battlequizservice;
+    
+    public void setBattleQuizPlay(BattleQuizPlay battlequizplay) {
+        this.battlequizplay = battlequizplay;
+    }
 
 	String me = ""; // 정보를 보내는 유저
 	String br_num = ""; // 게임방 번호
@@ -39,13 +48,13 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 	String msg = "";
 
 	public SocketHandler() {
+		super();
 	}
 
 	// 클라이언트로부터 메시지가 도착했을 때 호출
 	@Override
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-		this.logger.info("receive message:" + message.getPayload());
-		System.out.println(message);
+		System.out.println(message.getPayload());
 		// 받아온 문자열을 ':' 구분자를 통하여 배열로 저장
 		String strArray[] = ((String) message.getPayload()).split(":");
 
@@ -80,9 +89,9 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 			br_num = strArray[1];
 			me = strArray[2];
 			String q_type = strArray[3];
-
-			BattleQuizPlay battlequizplay = new BattleQuizPlayImpl();
-			Battle_Room room = battlequizplay.idRoomInfo(me);
+			
+			Battle_Room room = new Battle_Room();
+			room = battlequizservice.idRoomInfo(me);
 			int people_cnt = room.getBr_people();
 			// 게임방 인원이 2명 이하일떄 (즉, 나 혼자일때)
 			if (people_cnt < 2) {
@@ -96,9 +105,11 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 				}
 				return;
 			}
-
+			System.out.println("체크포인트5");
 			// DB로 부터 게임방이 시작되었는지 안되었는지 확인하기 위해 값을 꺼내 온다. Y는 실행중, N는 대기중
-			String startFlag = battlequizplay.selectBattleRoomState(br_num);
+			String startFlag = battlequizservice.selectBattleRoomState(br_num);
+			System.out.println("체크포인트6");
+			
 
 			// 게임방이 시작하고 있지 않은 상태
 			if (startFlag.equals("N")) {
@@ -309,7 +320,6 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		super.afterConnectionEstablished(session);
 		clients.add(session);
-		this.logger.info("add session!");
 	}
 
 	// 전송 에러 발생할 때 호출
@@ -321,7 +331,6 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 	// WebSocketHandler가 부분 메시지를 처리할 때 호출
 	@Override
 	public boolean supportsPartialMessages() {
-		this.logger.info("call method!");
 		return super.supportsPartialMessages();
 	}
 

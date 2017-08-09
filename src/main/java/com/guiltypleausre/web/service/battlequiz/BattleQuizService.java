@@ -13,4 +13,6 @@ public interface BattleQuizService {
 	public Battle_Play numPlayInfo(String br_num) throws Exception;
 	public Battle_Room numRoomInfo(Battle_Room dto) throws Exception;
 	public void updatePlayRoom(String br_num, String u_id) throws Exception;
+	public Battle_Room idRoomInfo(String u_id) throws Exception;
+	public String selectBattleRoomState(String br_num) throws Exception;
 }

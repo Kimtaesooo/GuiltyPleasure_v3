@@ -25,7 +25,6 @@ public class BattleQuizPlayImpl implements BattleQuizPlay {
 	public void makeRoom(Battle_Room dto) throws Exception {
 		sqlSession.insert(namespace + ".makeRoom", dto);
 		sqlSession.insert(namespace + ".playRoom", dto);
-		
 	}
 
 	@Override
@@ -35,20 +34,17 @@ public class BattleQuizPlayImpl implements BattleQuizPlay {
 
 	@Override
 	public Battle_Room idRoomInfo(String u_id) throws Exception {
-		return sqlSession.selectOne(namespace + ".idRoomInfo");
+		return sqlSession.selectOne(namespace + ".idRoomInfo", u_id);
 	}
 	
 	@Override
 	public Battle_Room numRoomInfo(Battle_Room dto) throws Exception {
-		System.out.println("DAO numRoomInfo");
-		System.out.println(dto.getBr_num());
-		System.out.println(dto.getU_id());
-		return sqlSession.selectOne(namespace + ".numRoomInfo");
+		return sqlSession.selectOne(namespace + ".numRoomInfo", dto);
 	}
 
 	@Override
 	public String selectBattleRoomState(String br_num) throws Exception {
-		String startFlag = sqlSession.selectOne(namespace + ".selectBattleRoomState");
+		String startFlag = sqlSession.selectOne(namespace + ".selectBattleRoomState", br_num);
 		System.out.println(startFlag);
 		if(startFlag.equals("N")){
 			sqlSession.update(namespace + ".updateBattleRoomState");
@@ -76,7 +72,6 @@ public class BattleQuizPlayImpl implements BattleQuizPlay {
 	public void updatePlayCnt(String br_num, String gameuser) throws Exception {
 		battleplaydto = sqlSession.selectOne(namespace + ".numPlayInfo");
 		String user01 = battleplaydto.getUser01();
-		String user02 = battleplaydto.getUser02();
 		if (gameuser.equals(user01)) {
 			sqlSession.update(namespace + ".updatePlayCnt1");
 		} else {

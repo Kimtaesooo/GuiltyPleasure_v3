@@ -54,13 +54,8 @@ public class BattleController {
 	// 베틀 페이지 이동
 	@RequestMapping(value = "/POSTenterRoom")
 	public ModelAndView POSTenterRoom(Battle_Room dto, HttpSession session) throws Exception {
-		ModelAndView mav = new ModelAndView("/battle/playroom");
-		System.out.println(dto.getBr_num());
-		
-		System.out.println("테스트1");
+		ModelAndView mav = new ModelAndView("/battle/playRoom");
 		battlequizservice.numRoomInfo(dto);
-		System.out.println("테스트3");
-		
 		/*
 		if (battleroom.getBr_people() == 2) {
 			PrintWriter out = response.getWriter();

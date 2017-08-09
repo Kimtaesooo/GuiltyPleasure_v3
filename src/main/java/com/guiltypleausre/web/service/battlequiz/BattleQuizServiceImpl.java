@@ -15,7 +15,7 @@ public class BattleQuizServiceImpl implements BattleQuizService {
 	
 	@Autowired
 	private BattleQuizPlay battleQuizPlay;
-
+	
 	@Override
 	public void makeRoom(Battle_Room dto) throws Exception {
 		battleQuizPlay.makeRoom(dto);
@@ -38,7 +38,6 @@ public class BattleQuizServiceImpl implements BattleQuizService {
 
 	@Override
 	public Battle_Room numRoomInfo(Battle_Room dto) throws Exception {
-		System.out.println("서비스 Dao");
 		return battleQuizPlay.numRoomInfo(dto);
 	}
 
@@ -46,6 +45,16 @@ public class BattleQuizServiceImpl implements BattleQuizService {
 	public void updatePlayRoom(String br_num, String u_id) throws Exception {
 		battleQuizPlay.updatePlayRoom(br_num, u_id);
 		
+	}
+
+	@Override
+	public Battle_Room idRoomInfo(String u_id) throws Exception{
+		return battleQuizPlay.idRoomInfo(u_id);	
+	}
+
+	@Override
+	public String selectBattleRoomState(String br_num) throws Exception {
+		return battleQuizPlay.selectBattleRoomState(br_num);
 	}
 	
 

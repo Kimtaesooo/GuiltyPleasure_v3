@@ -126,7 +126,7 @@
 			webSocket.send("sessionValue:" + br_num + ":" + me);
 		}
 		function onClose(session) {
-			webSocket.onClose(event);
+			webSocket.Close();
 			document.myForm.submit();
 		}
 		function onError(event) {
@@ -135,7 +135,6 @@
 		function onMessage(event) {
 			var message = new String(event.data);
 			var strArray = message.split(':');
-			alert(message);
 
 			// 채팅
 			if (strArray[0] == "messageSend" && strArray[1] == br_num) {
@@ -208,8 +207,7 @@
 			if (inputMessage.value == "") {
 			} else {
 				textarea.innerHTML += "<h5 align=right>"+  inputMessage.value + "</h5>";
-				webSocket.send("messageSend:" + br_num + ":" + me + ":"
-						+ inputMessage.value);
+				webSocket.send("messageSend:" + br_num + ":" + me + ":" + inputMessage.value);
 				inputMessage.value = "";
 				textarea.scrollTop = textarea.scrollHeight;
 			}
